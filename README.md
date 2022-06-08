@@ -65,6 +65,7 @@ Aufbau:
 
 ![PortsAndAdapters Aufbau](Bilder/01_PortsAndAdapters.PNG)
 ![PortsAndAdapters Beispiel](Bilder/02_PortsAndAdapters-Bsp.PNG)
+© Matthias Eschhold - Novatec Consulting GmbH
 
 *Grundprinzip: unabhängige Domänen*
 
@@ -94,6 +95,7 @@ Beleuchtet werden das Order- und Stockmanagement in Bezug auf den folgenden Abla
 *Artikel bestellen und Bestellstatus ändern (bezahlt, verpackt, verschickt)*
 
 ![Bestellvorgang Sequenzdiagramm](Bilder/03_UML.PNG)
+© Tobias Antensteiner
 
 Allgemeiner Aufbau:
  - MVC (Model-View-Controller) Pattern
@@ -247,6 +249,7 @@ Stellt grundsätzlich die Funktionalität für die Kommunikation bereit
 Die Service Discovery und das API-Gateway sind maßgeblich für die Lauffähigkeit verantwortlich und düfen daher nie ausfallen - Redundanzen!
 
 ![Architektur](Bilder/07_Microservice-Aufbau.PNG)
+© Katharina Friedl
 
 ### Vorgänge
 
@@ -317,10 +320,12 @@ Weiters existiert noch ein einfaches JavaScript Frontend, das die API (über das
 
 ### Fazit
 
-Mit Flexibilität kommt aber auch Komplexibilität (verteiltes System/vertreilte Transaktionen) - je flexibler die Gestaltung wird desto vielschichtiger wird die Applikation
+Mit Flexibilität kommt aber auch Komplexibilität (verteiltes System/vertreilte Transaktionen) - je flexibler die Gestaltung wird desto vielschichtiger wird die Applikation.
+
 Auch in diesem Beispiel könnten noch weitere Strukture aufgelöst (Strangler Pattern) werden
  - zB verwenden eines Out-Box-Patterns
    - zB Transaktion in Datenbank schreiben und Nachricht über MessageBroker schicken aufteilen (mittels Polling Mechanismus)
+     - zB Transaktion löst zwei Befehle aus: die Transaction selbst und ein Datensatz der in eine Out-Box Tabelle in der selben Datenbank geschrieben wird - Polling ließt zB alle paar Sekunden ob/was sich geändert hat und löst dann die Message aus
 
 *Strangler Pattern*: Monolithen immer weiter auftrennen, bis ein Microservice entsteht - der Monolith sollte möglichst modular - ein Modulith - sein (erster Schritt ist immer die Modularität)
 
