@@ -76,6 +76,7 @@ Grundsätze (zur Erreichnung):
 (https://de.wikipedia.org/wiki/Dependency-Inversion-Prinzip, https://de.wikipedia.org/wiki/Dependency_Injection)
 
 Anbindung an Business-Logik funkioniert über Schnittstellen, die **Ports** (ist immer ein *Interface*) &rarr; ein Port bildet also eine Kommunikationsschnittstelle
+
 Man unterscheidet:
 - Input (Primary) Ports - Von innen implementiert, von außen verwendet zB Controller verwendet Service (Interface)
 - Output (Secondary) Ports - Von außen implementiert, von innen verwendet zB Service verwendet Repository (Interface) - Datenbank ist von meiner Schnittstelle abhängig (Dependency Inversion)
@@ -106,12 +107,12 @@ Allgemeiner Aufbau:
 Ordermanagement Aufbau:
  - Grundstruktur mittels Ports And Adapters Pattern
  - Ereignisgesteuert (**Event-Driven**)
-   - Kommunikation zwischen den Modulen wedren durch Ereignisse/Events gesteuert - bildet die einige Schnittstelle untereinander
+   - Kommunikation zwischen den Modulen werden durch Ereignisse/Events gesteuert - bildet die Schnittstelle untereinander
    - verbessert die Kopplung dahingehend, da Events von einer unabhängigen Stelle "blind" ausgeführt werden (Komponente A kennt neben der Implementierung auch nicht die Signaturen und damit die Funktionalitäten der Komponente B bzw. deren Schnittstelle)
    - Events werden über die Ports abgewickelt
    - Events (zB Controller, Repository) nutzen zentral festgelegte Commands und Queries
    - Intern umgesetzt mittels Spring Events
-     - eigene Handler übernehmen Event Processing (über ApplicationListener asynchron zwischen Modulen und ApplicationEventPublisher synchron bei den Domain-eigenen Events)
+     - eigene Handler übernehmen Event Processing (über ApplicationListener und ApplicationEventPublisher (sowohl zwischen den Modulen asynchron als auch synchron bei den Domain-eigenen Events))
  - Domänenorientiert (**Domain-Driven**)
    - Domänen verwenden um die Wiederverwendbarkeit zu gewährleisten sogenannte ValueObjects
    - **ValueObjects**: immutable/unveränderbare "Datenfelder" (keine Seiteneffekte) - umgesetzt mittels Java Records
@@ -233,7 +234,7 @@ Das Beispiel nutzt aber auch zwei weitere Pattern, um die gewünschte Microservi
 Um nicht mehr direkt auf die verschiedenen Services zugreifen zu müssen wird ein API-Gateway verwendet
  - zentrale Schnittstelle/Einstiegspunkt alle Anfragen (von und zum Infrastruktur-Layer)
  - definiert Routen nach außen hin (in diesem Fall für Order- und Stockmanagement)
- - dadurch sind die einzelnen Services von außen nicht mehr Sichbar
+ - dadurch sind die einzelnen Services von außen nicht mehr sichtbar
  - könnte daher auch als Authentifizierungschnittstelle dienten (mittels Tokens und eigener Datenbank)
  - hier wäre auch der Einbau von Resilienzpattern, Fallbacks, usw. möglich (Ausfallsicherheit!)
  &rarr; zentralisiert also alle Anfragen an und von Services - Wiederverwandbarkeit!
